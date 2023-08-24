@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace "org.outline.sdk.demo.connectivity.capacitor"
+    namespace "org.outline.sdk.connectivity"
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "org.outline.sdk.demo.connectivity.capacitor"
+        applicationId "org.outline.sdk.connectivity"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
