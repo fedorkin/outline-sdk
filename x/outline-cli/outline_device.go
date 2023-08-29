@@ -129,19 +129,19 @@ func (d *OutlineDevice) Refresh() error {
 func (d *OutlineDevice) RelayTraffic(netDev io.ReadWriter) error {
 	var err1, err2 error
 
-	fmt.Println("debug: start forwarding OutlineDevice data to tun")
-	if _, err1 = io.Copy(netDev, d.t2s); err1 != nil {
-		fmt.Printf("warning: failed to forward OutlineDevice data to tun: %v\n", err1)
-	} else {
-		fmt.Println("debug: OutlineDevice -> tun eof")
-	}
-
-	fmt.Println("debug: OutlineDevice start receiving data from tun")
-	if _, err2 = io.Copy(d.t2s, netDev); err2 != nil {
-		fmt.Printf("warning: failed to write data to OutlineDevice: %v\n", err2)
+	_, err1 = io.Copy(d.t2s, netDev)
+	if err1 != nil {
+		fmt.Printf("warning: failed to write data to OutlineDevice: %v\n", err1)
 	} else {
 		fmt.Println("debug: tun -> OutlineDevice eof")
 	}
 
-	return errors.Join(err1, err2)
+	_, err2 = io.Copy(netDev, d.t2s)
+	if err2 != nil {
+		fmt.Printf("warning: failed to forward OutlineDevice data to tun: %v\n", err2)
+	} else {
+		fmt.Println("debug: OutlineDevice -> tun eof")
+	}
+
+	return errors.Join(err1, err2) // Предполагается, что errors.Join корректно обрабатывает nil ошибки
 }
