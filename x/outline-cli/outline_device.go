@@ -21,7 +21,6 @@ import (
 	"io"
 	"net"
 	"strconv"
-	"sync"
 
 	"github.com/Jigsaw-Code/outline-internal-sdk/network"
 	"github.com/Jigsaw-Code/outline-internal-sdk/network/dnstruncate"
