@@ -118,7 +118,7 @@ func (d *OutlineDevice) Refresh() error {
 	_, err = connectivity.TestResolverPacketConnectivity(context.Background(), packetResolver, connectivityTestDomain)
 	fmt.Printf("debug: UDP connectivity test result: %v\n", err)
 
-	if err != nil {
+	if err == nil {
 		fmt.Println("info: remote Shadowsocks server doesn't support UDP, switching to local DNS truncation handler")
 		return d.pktProxy.SetProxy(d.fallbackPktProxy)
 	} else {
